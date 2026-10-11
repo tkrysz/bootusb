@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiboot USB Guide</title>
+    
+    <link rel="alternate" hreflang="pl" href="pl/">
+    
+    <link rel="alternate" hreflang="en" href="en/">
+    
+    <link rel="alternate" hreflang="de" href="de/">
+    
+    <script>
+        (function () {
+            var supported = ["pl", "en", "de"];
+            var fallback = "pl";
+            var lang = null;
+
+            // 1. Język wybrany wcześniej ręcznie
+            try {
+                var stored = localStorage.getItem('lang');
+                if (supported.indexOf(stored) !== -1) lang = stored;
+            } catch (e) {}
+
+            // 2. Język przeglądarki/systemu (np. "de-DE" -> "de")
+            if (!lang) {
+                var prefs = navigator.languages && navigator.languages.length
+                    ? navigator.languages : [navigator.language || ''];
+                for (var i = 0; i < prefs.length && !lang; i++) {
+                    var code = String(prefs[i]).toLowerCase().split('-')[0];
+                    if (supported.indexOf(code) !== -1) lang = code;
+                }
+            }
+
+            // Ścieżka względna, żeby działało też pod /nazwa-repo/ na GitHub Pages
+            location.replace((lang || fallback) + '/' + location.search + location.hash);
+        })();
+    </script>
+</head>
+<body>
+    <noscript>
+        <p>
+            
+            <a href="pl/">Polski</a> | 
+            
+            <a href="en/">English</a> | 
+            
+            <a href="de/">Deutsch</a>
+            
+        </p>
+    </noscript>
+</body>
+</html>

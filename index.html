@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ t.title }}</title>
+    {% for code in langs %}
+    <link rel="alternate" hreflang="{{ code }}" href="../{{ code }}/">
+    {% endfor %}
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -38,7 +41,7 @@
 <div class="hero-section text-center">
     <div class="lang-switcher btn-group btn-group-sm" role="group" aria-label="{{ t.language }}">
         {% for code, name in langs.items() %}
-        <a href="{{ url_for('guide', lang=code) }}" hreflang="{{ code }}"
+        <a href="../{{ code }}/" hreflang="{{ code }}" data-lang="{{ code }}"
            class="btn {{ 'btn-light' if code == lang else 'btn-outline-light' }}"
            {% if code == lang %}aria-current="true"{% endif %}>{{ code|upper }}</a>
         {% endfor %}
@@ -152,5 +155,13 @@
 {% endfor %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Zapamiętaj ręcznie wybrany język – strona główna użyje go przy kolejnych wizytach
+    document.querySelectorAll('.lang-switcher [data-lang]').forEach(function (a) {
+        a.addEventListener('click', function () {
+            try { localStorage.setItem('lang', a.dataset.lang); } catch (e) {}
+        });
+    });
+</script>
 </body>
 </html>

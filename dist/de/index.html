@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiboot-USB-Anleitung</title>
+    
+    <link rel="alternate" hreflang="pl" href="../pl/">
+    
+    <link rel="alternate" hreflang="en" href="../en/">
+    
+    <link rel="alternate" hreflang="de" href="../de/">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .hero-section {
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+        .card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .difficulty-badge {
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-section text-center">
+    <div class="lang-switcher btn-group btn-group-sm" role="group" aria-label="Sprache">
+        
+        <a href="../pl/" hreflang="pl" data-lang="pl"
+           class="btn btn-outline-light"
+           >PL</a>
+        
+        <a href="../en/" hreflang="en" data-lang="en"
+           class="btn btn-outline-light"
+           >EN</a>
+        
+        <a href="../de/" hreflang="de" data-lang="de"
+           class="btn btn-light"
+           aria-current="true">DE</a>
+        
+    </div>
+    <div class="container">
+        <h1 class="display-4 fw-bold">Wie erstellt man einen Multiboot-USB-Stick?</h1>
+        <p class="lead">Ein Leitfaden zu den besten Methoden, mehrere Betriebssysteme auf einem USB-Stick unterzubringen.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4">
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold">Ventoy</h5>
+                        <span class="badge bg-info text-dark difficulty-badge">Sehr einfach</span>
+                    </div>
+                    <p class="card-text text-muted small">Eine revolutionäre Methode. Sie installieren Ventoy einmal auf dem USB-Stick und ziehen danach einfach .ISO-Dateien wie normale Dateien darauf.</p>
+
+                    <hr>
+                    <p class="fw-bold small mb-1">Vorteile:</p>
+                    <ul class="ps-3 small">
+                        
+                        <li>Schnellste Methode</li>
+                        
+                        <li>Verschiedene Systeme mischbar</li>
+                        
+                        <li>Kein erneutes Formatieren nach dem Hinzufügen einer ISO nötig</li>
+                        
+                    </ul>
+
+                    <p class="fw-bold small mb-1">Nachteile:</p>
+                    <ul class="ps-3 small text-danger">
+                        
+                        <li>Benötigt UEFI-/Legacy-Unterstützung auf spezielle Weise</li>
+                        
+                    </ul>
+
+                    <p class="small text-muted mb-2">Plattform: <strong>Windows, Linux</strong></p>
+
+                    <div class="d-grid gap-2 mb-2">
+                        
+                        <a href="https://www.ventoy.net/de/index.html" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-outline-secondary">Projektseite</a>
+                        
+                        <a href="https://github.com/ventoy/Ventoy/releases" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-primary">Herunterladen</a>
+                        
+                        <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-ventoy">Schritt-für-Schritt-Anleitung</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold">YUMI (Your Universal Multiboot Installer)</h5>
+                        <span class="badge bg-info text-dark difficulty-badge">Mittel</span>
+                    </div>
+                    <p class="card-text text-muted small">Ein klassisches Tool, mit dem Sie beim Erstellen des USB-Sticks Systeme aus einer Liste auswählen.</p>
+
+                    <hr>
+                    <p class="fw-bold small mb-1">Vorteile:</p>
+                    <ul class="ps-3 small">
+                        
+                        <li>Sehr stabil</li>
+                        
+                        <li>Große Auswahl an Systemen</li>
+                        
+                        <li>Funktioniert hervorragend auf älteren Rechnern</li>
+                        
+                    </ul>
+
+                    <p class="fw-bold small mb-1">Nachteile:</p>
+                    <ul class="ps-3 small text-danger">
+                        
+                        <li>Das Programm muss für jedes neue System erneut gestartet werden</li>
+                        
+                    </ul>
+
+                    <p class="small text-muted mb-2">Plattform: <strong>Windows, Linux</strong></p>
+
+                    <div class="d-grid gap-2 mb-2">
+                        
+                        <a href="https://pendrivelinux.com/yumi-multiboot-usb-creator/" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-primary">Herunterladen</a>
+                        
+                        <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-yumi">Schritt-für-Schritt-Anleitung</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold">WinSetupFromUSB</h5>
+                        <span class="badge bg-info text-dark difficulty-badge">Mittel</span>
+                    </div>
+                    <p class="card-text text-muted small">Ein Spezialwerkzeug, das sich vor allem auf Windows-Installationsmedien (XP, 7, 8, 10, 11) konzentriert.</p>
+
+                    <hr>
+                    <p class="fw-bold small mb-1">Vorteile:</p>
+                    <ul class="ps-3 small">
+                        
+                        <li>Am besten für Windows-Systeme</li>
+                        
+                        <li>Unterstützt sehr alte Standards</li>
+                        
+                    </ul>
+
+                    <p class="fw-bold small mb-1">Nachteile:</p>
+                    <ul class="ps-3 small text-danger">
+                        
+                        <li>Für Linux-Systeme weniger intuitiv</li>
+                        
+                    </ul>
+
+                    <p class="small text-muted mb-2">Plattform: <strong>Windows</strong></p>
+
+                    <div class="d-grid gap-2 mb-2">
+                        
+                        <a href="https://www.winsetupfromusb.com/downloads/" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-primary">Herunterladen</a>
+                        
+                        <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-winsetup">Schritt-für-Schritt-Anleitung</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold">Rufus (Single Boot/Manual)</h5>
+                        <span class="badge bg-info text-dark difficulty-badge">Einfach</span>
+                    </div>
+                    <p class="card-text text-muted small">Obwohl Rufus hauptsächlich für ein einzelnes System gedacht ist, lässt es sich als Grundlage für fortgeschrittenere Methoden verwenden.</p>
+
+                    <hr>
+                    <p class="fw-bold small mb-1">Vorteile:</p>
+                    <ul class="ps-3 small">
+                        
+                        <li>Zuverlässig</li>
+                        
+                        <li>Schnell</li>
+                        
+                    </ul>
+
+                    <p class="fw-bold small mb-1">Nachteile:</p>
+                    <ul class="ps-3 small text-danger">
+                        
+                        <li>Keine native Multiboot-Unterstützung</li>
+                        
+                    </ul>
+
+                    <p class="small text-muted mb-2">Plattform: <strong>Windows</strong></p>
+
+                    <div class="d-grid gap-2 mb-2">
+                        
+                        <a href="https://rufus.ie/de/" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-primary">Herunterladen</a>
+                        
+                        <a href="https://github.com/pbatard/rufus/releases" target="_blank" rel="noopener noreferrer"
+                           class="btn btn-sm btn-outline-secondary">GitHub</a>
+                        
+                        <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-rufus">Schritt-für-Schritt-Anleitung</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="alert alert-warning mt-4" role="alert">
+        <strong>Achtung:</strong> Beim Erstellen eines bootfähigen USB-Sticks werden alle Daten auf dem Datenträger gelöscht. Erstellen Sie vorher ein Backup. Laden Sie Programme nur von den offiziellen Webseiten herunter und prüfen Sie nach Möglichkeit die Prüfsummen der ISO-Dateien.
+    </div>
+
+    <div class="mt-5 p-4 bg-white rounded shadow-sm">
+        <h3 class="text-center mb-4">Zusammenfassung - was wählen?</h3>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Methode</th>
+                        <th>Haupteinsatzzweck</th>
+                        <th>Schwierigkeitsgrad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><strong>Ventoy</strong></td>
+                        <td>Für jeden (am bequemsten)</td>
+                        <td>Sehr niedrig</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>YUMI</strong></td>
+                        <td>Für Fans klassischer Tools</td>
+                        <td>Mittel</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>WinSetupFromUSB</strong></td>
+                        <td>Windows reparieren/installieren</td>
+                        <td>Mittel</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>Rufus</strong></td>
+                        <td>USB-Stick mit einem einzelnen System</td>
+                        <td>Niedrig</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 mb-4 text-muted">
+        <small>&copy; 2026 Multiboot Guide </small>
+    </footer>
+</div>
+
+
+<div class="modal fade" id="modal-ventoy" tabindex="-1" aria-labelledby="modal-ventoy-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-ventoy-label">Ventoy – bootfähigen USB-Stick erstellen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body">
+                <ol class="steps">
+                    
+                    <li class="mb-2">Laden Sie die neueste Ventoy-Version (ventoy-x.y.z-windows.zip) herunter und entpacken Sie das Archiv.</li>
+                    
+                    <li class="mb-2">Stecken Sie den USB-Stick an (sichern Sie Ihre Daten – die Installation formatiert ihn).</li>
+                    
+                    <li class="mb-2">Starten Sie Ventoy2Disk.exe (unter Linux: sudo sh Ventoy2Disk.sh -i /dev/sdX).</li>
+                    
+                    <li class="mb-2">Wählen Sie den Stick in der Liste <em>Device</em> aus. Wählen Sie unter <em>Option → Partition Style</em> GPT für neuere UEFI-Rechner oder MBR für ältere.</li>
+                    
+                    <li class="mb-2">Klicken Sie auf <em>Install</em> und bestätigen Sie die Warnung vor Datenverlust zweimal.</li>
+                    
+                    <li class="mb-2">Danach erscheint auf dem Stick eine Partition <em>Ventoy</em>. Kopieren Sie Ihre .ISO-Dateien (Windows, Linux, Tools) einfach dorthin.</li>
+                    
+                    <li class="mb-2">Starten Sie den Rechner vom USB-Stick (Boot-Menü-Taste: F12, F10, Esc oder F8 – je nach Hersteller) und wählen Sie ein Image im Ventoy-Menü aus.</li>
+                    
+                </ol>
+            </div>
+            <div class="modal-footer">
+                
+                <a href="https://github.com/ventoy/Ventoy/releases" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Herunterladen</a>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-yumi" tabindex="-1" aria-labelledby="modal-yumi-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-yumi-label">YUMI (Your Universal Multiboot Installer) – bootfähigen USB-Stick erstellen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body">
+                <ol class="steps">
+                    
+                    <li class="mb-2">Laden Sie YUMI herunter (die <em>exFAT</em>-Version für ISO-Dateien über 4 GB und UEFI-Systeme, die BIOS-Version für ältere Rechner) – eine Installation ist nicht nötig.</li>
+                    
+                    <li class="mb-2">Stecken Sie den USB-Stick an und starten Sie YUMI als Administrator.</li>
+                    
+                    <li class="mb-2">Akzeptieren Sie die Lizenz und wählen Sie in Schritt 1 den Laufwerksbuchstaben des Sticks.</li>
+                    
+                    <li class="mb-2">Wählen Sie in Schritt 2 eine Distribution aus der Liste (z. B. Ubuntu). Aktivieren Sie bei der ersten Verwendung die Formatierungsoption.</li>
+                    
+                    <li class="mb-2">Geben Sie in Schritt 3 die heruntergeladene ISO-Datei an (oder nutzen Sie <em>Download the ISO</em>) und klicken Sie auf <em>Create</em>.</li>
+                    
+                    <li class="mb-2">Anschließend fragt YUMI, ob ein weiteres System hinzugefügt werden soll – bestätigen Sie und wiederholen Sie die Schritte 2–3 für jede weitere ISO.</li>
+                    
+                    <li class="mb-2">Starten Sie den Rechner vom USB-Stick und wählen Sie ein System im Startmenü.</li>
+                    
+                </ol>
+            </div>
+            <div class="modal-footer">
+                
+                <a href="https://pendrivelinux.com/yumi-multiboot-usb-creator/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Herunterladen</a>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-winsetup" tabindex="-1" aria-labelledby="modal-winsetup-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-winsetup-label">WinSetupFromUSB – bootfähigen USB-Stick erstellen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body">
+                <ol class="steps">
+                    
+                    <li class="mb-2">Laden Sie WinSetupFromUSB herunter, starten Sie das selbstextrahierende Archiv und wählen Sie die 64-Bit-Version (WinSetupFromUSB_x64.exe).</li>
+                    
+                    <li class="mb-2">Stecken Sie den USB-Stick an und wählen Sie ihn im Feld <em>USB disk selection</em> aus.</li>
+                    
+                    <li class="mb-2">Aktivieren Sie <em>Auto format it with FBinst</em> (wählen Sie FAT32; für ISO-Dateien über 4 GB NTFS, dann funktioniert aber nur der BIOS-/Legacy-Modus).</li>
+                    
+                    <li class="mb-2">Aktivieren Sie den Bereich des hinzuzufügenden Systems (z. B. <em>Vista/7/8/10/11/Server</em>) und wählen Sie die ISO-Datei über die Schaltfläche <em>…</em>. Für Linux nutzen Sie den Bereich <em>Linux ISO/Other Grub4dos compatible ISO</em>.</li>
+                    
+                    <li class="mb-2">Klicken Sie auf <em>GO</em> und bestätigen Sie die Warnungen. Warten Sie auf die Meldung <em>Job done</em>.</li>
+                    
+                    <li class="mb-2">Weitere Systeme fügen Sie hinzu, indem Sie das Programm erneut starten – diesmal <b>ohne</b> die Formatierungsoption.</li>
+                    
+                    <li class="mb-2">Testen Sie den Stick im QEMU-Emulator (Option <em>Test in QEMU</em>) oder starten Sie einen Rechner davon.</li>
+                    
+                </ol>
+            </div>
+            <div class="modal-footer">
+                
+                <a href="https://www.winsetupfromusb.com/downloads/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Herunterladen</a>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-rufus" tabindex="-1" aria-labelledby="modal-rufus-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-rufus-label">Rufus (Single Boot/Manual) – bootfähigen USB-Stick erstellen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+            </div>
+            <div class="modal-body">
+                <ol class="steps">
+                    
+                    <li class="mb-2">Laden Sie Rufus herunter (die portable Version benötigt keine Installation) und starten Sie es.</li>
+                    
+                    <li class="mb-2">Stecken Sie den USB-Stick an – er wird im Feld <em>Laufwerk</em> automatisch erkannt (ein Backup ist Pflicht, der Stick wird gelöscht).</li>
+                    
+                    <li class="mb-2">Klicken Sie auf <em>AUSWAHL</em> und wählen Sie die ISO-Datei des Systems.</li>
+                    
+                    <li class="mb-2">Wählen Sie das Partitionsschema: <em>GPT</em> für UEFI oder <em>MBR</em> für BIOS/Legacy (Rufus schlägt einen Wert für das jeweilige Image vor).</li>
+                    
+                    <li class="mb-2">Klicken Sie auf <em>START</em>, wählen Sie bei Nachfrage den ISO-Image-Modus und bestätigen Sie.</li>
+                    
+                    <li class="mb-2">Starten Sie den Rechner vom USB-Stick. Für Multiboot können Sie so einen Stick mit einem System erstellen oder stattdessen Ventoy verwenden.</li>
+                    
+                </ol>
+            </div>
+            <div class="modal-footer">
+                
+                <a href="https://rufus.ie/de/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Herunterladen</a>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Zapamiętaj ręcznie wybrany język – strona główna użyje go przy kolejnych wizytach
+    document.querySelectorAll('.lang-switcher [data-lang]').forEach(function (a) {
+        a.addEventListener('click', function () {
+            try { localStorage.setItem('lang', a.dataset.lang); } catch (e) {}
+        });
+    });
+</script>
+</body>
+</html>

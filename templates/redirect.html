@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ default_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiboot USB Guide</title>
+    {% for code in langs %}
+    <link rel="alternate" hreflang="{{ code }}" href="{{ code }}/">
+    {% endfor %}
+    <script>
+        (function () {
+            var supported = {{ langs.keys()|list|tojson }};
+            var fallback = {{ default_lang|tojson }};
+            var lang = null;
+
+            // 1. Język wybrany wcześniej ręcznie
+            try {
+                var stored = localStorage.getItem('lang');
+                if (supported.indexOf(stored) !== -1) lang = stored;
+            } catch (e) {}
+
+            // 2. Język przeglądarki/systemu (np. "de-DE" -> "de")
+            if (!lang) {
+                var prefs = navigator.languages && navigator.languages.length
+                    ? navigator.languages : [navigator.language || ''];
+                for (var i = 0; i < prefs.length && !lang; i++) {
+                    var code = String(prefs[i]).toLowerCase().split('-')[0];
+                    if (supported.indexOf(code) !== -1) lang = code;
+                }
+            }
+
+            // Ścieżka względna, żeby działało też pod /nazwa-repo/ na GitHub Pages
+            location.replace((lang || fallback) + '/' + location.search + location.hash);
+        })();
+    </script>
+</head>
+<body>
+    <noscript>
+        <p>
+            {% for code, name in langs.items() %}
+            <a href="{{ code }}/">{{ name }}</a>{% if not loop.last %} | {% endif %}
+            {% endfor %}
+        </p>
+    </noscript>
+</body>
+</html>
