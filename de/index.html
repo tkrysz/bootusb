@@ -39,6 +39,20 @@
         .catalog-card:hover {
             transform: none;
         }
+        #recovery code, .modal-body code {
+            background: #f1f3f5;
+            color: #212529;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-variant-ligatures: none; /* "--" musi zostać dwoma myślnikami */
+            /* polecenie nie może się łamać w środku (np. między "--"), przy zbyt wąskim ekranie się przewija */
+            display: inline-block;
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            vertical-align: bottom;
+        }
         html { scroll-behavior: smooth; }
         [id^="cat-"] { scroll-margin-top: 16px; }
         .difficulty-badge {
@@ -571,6 +585,99 @@
         </div>
 
         <div class="alert alert-danger mt-4" role="alert">Laden Sie Images nur von den offiziellen Webseiten herunter. Inoffizielle „abgespeckte“ oder „aktivierte“ Windows-Versionen und Tool-Sammlungen aus zufälligen Quellen enthalten oft Schadsoftware.</div>
+    </section>
+
+    <section id="recovery" class="mt-5">
+        <h2 class="text-center mb-2">USB-Stick funktioniert nicht? So reparieren Sie ihn</h2>
+        <p class="text-center text-muted mb-4">Nach dem Erstellen eines bootfähigen Sticks (Linux, Windows-Installer, ISO-Image, Ventoy) zeigt das System oft nur einen kleinen Teil der Kapazität an, listet seltsame Partitionen auf oder verweigert das Formatieren. Am wirksamsten ist es, die Partitionsstruktur vollständig zu löschen und neu anzulegen.</p>
+
+        <div class="alert alert-danger" role="alert">Die folgenden Schritte <b>löschen alle Daten</b> auf dem gewählten Datenträger unwiderruflich. Eine falsche Datenträgernummer (Windows) oder ein falscher Gerätename (Linux) kann Ihre Systemplatte löschen. Prüfen Sie vor jedem Befehl Größe und Modell des Datenträgers.</div>
+
+        <div class="card border-0 shadow-sm catalog-card mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold">Typische Anzeichen</h5>
+                <ul class="mb-0">
+                    <li>Der Stick zeigt nur eine winzige Kapazität (z. B. 32 GB als 50 MB).</li><li>Windows meldet „Die Formatierung konnte nicht abgeschlossen werden“ oder zeigt mehrere seltsame Partitionen.</li><li>Der Datenträger ist in der Datenträgerverwaltung sichtbar, hat aber keinen Laufwerksbuchstaben oder keine Option „Formatieren“.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Windows: Diskpart</h4>
+                        <p class="text-muted small">Ein integriertes Kommandozeilenwerkzeug, das die Partitionstabelle löscht und eine neue von Grund auf anlegen lässt.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Stecken Sie den Stick an und schließen Sie alle Fenster, die ihn verwenden.</li>
+                            
+                            <li class="mb-2">Drücken Sie <kbd>Win</kbd>, geben Sie <code>cmd</code> ein, klicken Sie mit der rechten Maustaste auf <em>Eingabeaufforderung</em> und wählen Sie <em>Als Administrator ausführen</em>.</li>
+                            
+                            <li class="mb-2">Starten Sie das Werkzeug: <code>diskpart</code></li>
+                            
+                            <li class="mb-2">Datenträger anzeigen: <code>list disk</code>. Erkennen Sie Ihren Stick an der Größe (Spalte <em>Size</em>), z. B. „Disk 2“.</li>
+                            
+                            <li class="mb-2">Stick auswählen: <code>select disk 2</code> (geben Sie die Nummer Ihres eigenen Sticks ein!). Prüfen Sie die Auswahl mit <code>detail disk</code>.</li>
+                            
+                            <li class="mb-2">Falls der Datenträger schreibgeschützt ist: <code>attributes disk clear readonly</code></li>
+                            
+                            <li class="mb-2">Alle Partitionen entfernen: <code>clean</code>. Um den gesamten Datenträger gründlich mit Nullen zu überschreiben (dauert lange), nutzen Sie <code>clean all</code>.</li>
+                            
+                            <li class="mb-2">Neue Partition anlegen: <code>create partition primary</code></li>
+                            
+                            <li class="mb-2">Formatieren: <code>format fs=fat32 quick</code>. Für große Dateien oder Sticks über 32 GB nutzen Sie <code>format fs=exfat quick</code> oder <code>format fs=ntfs quick</code>.</li>
+                            
+                            <li class="mb-2">Laufwerksbuchstaben zuweisen: <code>assign</code>, danach das Werkzeug beenden: <code>exit</code>.</li>
+                            
+                        </ol>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Linux: Terminal</h4>
+                        <p class="text-muted small">Für diese Schritte genügen Werkzeuge, die in den meisten Distributionen vorhanden sind (lsblk, wipefs, parted, mkfs). Führen Sie sie mit <code>sudo</code> aus.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Stecken Sie den Stick an und listen Sie die Datenträger auf: <code>lsblk -o NAME,SIZE,MODEL,TRAN</code>. Ein USB-Stick hat meist den Transport <em>usb</em> und einen Namen wie <code>/dev/sdb</code>. <code>/dev/sda</code> ist meist die Systemplatte!</li>
+                            
+                            <li class="mb-2">Hängen Sie alle Partitionen des Sticks aus: <code>sudo umount /dev/sdb*</code> (Meldungen zu nicht eingehängten Partitionen können Sie ignorieren).</li>
+                            
+                            <li class="mb-2">Signaturen von Dateisystemen und Partitionstabellen entfernen: <code>sudo wipefs --all /dev/sdb</code></li>
+                            
+                            <li class="mb-2">Zur Sicherheit den Anfang des Datenträgers mit Nullen überschreiben: <code>sudo dd if=/dev/zero of=/dev/sdb bs=1M count=100</code></li>
+                            
+                            <li class="mb-2">Neue Tabelle und Partition anlegen: <code>sudo parted -s /dev/sdb mklabel msdos</code> <code>sudo parted -s /dev/sdb mkpart primary 1MiB 100%</code></li>
+                            
+                            <li class="mb-2">Partition formatieren: <code>sudo mkfs.vfat -F 32 -n PENDRIVE /dev/sdb1</code>. Statt FAT32 können Sie <code>sudo mkfs.exfat /dev/sdb1</code> oder <code>sudo mkfs.ext4 /dev/sdb1</code> verwenden.</li>
+                            
+                            <li class="mb-2">Daten schreiben und den Stick sicher auswerfen: <code>sync && sudo eject /dev/sdb</code></li>
+                            
+                        </ol>
+                        
+                        <div class="alert alert-info small mb-0">Lieber grafisch? Wählen Sie in <em>Laufwerke</em> (GNOME Disks) den Stick aus, im Menü „Datenträger formatieren…“ und stellen Sie <em>Partitionierung: Kompatibel mit allen Systemen und Geräten (MBR)</em> ein. Alternativ nutzen Sie GParted: <em>Gerät → Partitionstabelle erstellen</em>.</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="card border-0 shadow-sm catalog-card mt-4">
+            <div class="card-body">
+                <h5 class="fw-bold">Wenn das nicht hilft</h5>
+                <ul class="mb-0">
+                    <li class="mb-1">Der Stick erscheint nicht in <code>list disk</code> / <code>lsblk</code>: Versuchen Sie einen anderen USB-Anschluss (am besten direkt am Rechner, ohne Hub) und ein anderes Kabel oder einen anderen Rechner.</li><li class="mb-1">Schreibfehler treten auf oder der Stick wird schreibgeschützt: Er hat womöglich einen Schreibschutzschalter oder der Speicherchip ist beschädigt.</li><li class="mb-1">Die Kapazität ist nach <code>clean</code> noch immer falsch: Der Stick könnte eine Fälschung mit gefälschter Kapazität sein. Testen Sie ihn mit F3 (Linux/macOS) oder H2testw (Windows).</li><li class="mb-1">Wenn nichts hilft, probieren Sie Rufus: Stick auswählen, Schema MBR und FAT32 oder exFAT einstellen und auf START klicken.</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <div class="mt-5 p-4 bg-white rounded shadow-sm">

@@ -39,6 +39,20 @@
         .catalog-card:hover {
             transform: none;
         }
+        #recovery code, .modal-body code {
+            background: #f1f3f5;
+            color: #212529;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-variant-ligatures: none; /* "--" musi zostać dwoma myślnikami */
+            /* polecenie nie może się łamać w środku (np. między "--"), przy zbyt wąskim ekranie się przewija */
+            display: inline-block;
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            vertical-align: bottom;
+        }
         html { scroll-behavior: smooth; }
         [id^="cat-"] { scroll-margin-top: 16px; }
         .difficulty-badge {
@@ -571,6 +585,99 @@
         </div>
 
         <div class="alert alert-danger mt-4" role="alert">Pobieraj obrazy wyłącznie z oficjalnych stron. Nieoficjalne „odchudzone” lub „zaktywowane” wersje Windows i zbiory narzędzi z przypadkowych źródeł często zawierają złośliwe oprogramowanie.</div>
+    </section>
+
+    <section id="recovery" class="mt-5">
+        <h2 class="text-center mb-2">Pendrive nie działa? Jak go naprawić</h2>
+        <p class="text-center text-muted mb-4">Po utworzeniu bootowalnego pendrive (Linux, instalator Windows, obraz ISO, Ventoy) system często widzi tylko mały fragment pojemności, pokazuje błędne partycje albo odmawia formatowania. Najskuteczniejszy sposób to całkowite wyczyszczenie struktury partycji i utworzenie jej od nowa.</p>
+
+        <div class="alert alert-danger" role="alert">Poniższe kroki <b>trwale usuwają wszystkie dane</b> z wybranego dysku. Pomyłka w numerze dysku (Windows) lub nazwie urządzenia (Linux) może skasować dysk systemowy. Przed każdym poleceniem sprawdź rozmiar i model nośnika.</div>
+
+        <div class="card border-0 shadow-sm catalog-card mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold">Typowe objawy</h5>
+                <ul class="mb-0">
+                    <li>Pendrive pokazuje się z bardzo małą pojemnością (np. 32 GB jako 50 MB).</li><li>Windows pisze „Nie można ukończyć formatowania” albo pokazuje kilka dziwnych partycji.</li><li>Dysk jest widoczny w Zarządzaniu dyskami, ale nie ma litery lub opcji „Formatuj”.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Windows: Diskpart</h4>
+                        <p class="text-muted small">Wbudowane narzędzie wiersza poleceń, które czyści tablicę partycji i pozwala utworzyć ją od początku.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Podłącz pendrive i zamknij okna, które z niego korzystają.</li>
+                            
+                            <li class="mb-2">Naciśnij <kbd>Win</kbd>, wpisz <code>cmd</code>, kliknij prawym przyciskiem <em>Wiersz polecenia</em> i wybierz <em>Uruchom jako administrator</em>.</li>
+                            
+                            <li class="mb-2">Uruchom narzędzie: <code>diskpart</code></li>
+                            
+                            <li class="mb-2">Wyświetl dyski: <code>list disk</code>. Rozpoznaj pendrive po rozmiarze (kolumna <em>Size</em>), np. „Disk 2”.</li>
+                            
+                            <li class="mb-2">Wybierz pendrive: <code>select disk 2</code> (wpisz numer swojego pendrive!). Sprawdź wybór poleceniem <code>detail disk</code>.</li>
+                            
+                            <li class="mb-2">Jeśli dysk jest chroniony przed zapisem: <code>attributes disk clear readonly</code></li>
+                            
+                            <li class="mb-2">Usuń wszystkie partycje: <code>clean</code>. Do dokładnego wyzerowania całego nośnika (trwa długo) użyj <code>clean all</code>.</li>
+                            
+                            <li class="mb-2">Utwórz nową partycję: <code>create partition primary</code></li>
+                            
+                            <li class="mb-2">Sformatuj ją: <code>format fs=fat32 quick</code>. Dla dużych plików lub pendrive powyżej 32 GB użyj <code>format fs=exfat quick</code> lub <code>format fs=ntfs quick</code>.</li>
+                            
+                            <li class="mb-2">Nadaj literę dysku: <code>assign</code>, a potem zamknij narzędzie: <code>exit</code>.</li>
+                            
+                        </ol>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Linux: terminal</h4>
+                        <p class="text-muted small">Do tych kroków wystarczą narzędzia dostępne w większości dystrybucji (lsblk, wipefs, parted, mkfs). Działają z uprawnieniami <code>sudo</code>.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Podłącz pendrive i wyświetl dyski: <code>lsblk -o NAME,SIZE,MODEL,TRAN</code>. Pendrive ma zwykle transport <em>usb</em> i nazwę typu <code>/dev/sdb</code>. <code>/dev/sda</code> to najczęściej dysk systemowy!</li>
+                            
+                            <li class="mb-2">Odmontuj wszystkie partycje pendrive: <code>sudo umount /dev/sdb*</code> (komunikaty o niezamontowanych partycjach możesz zignorować).</li>
+                            
+                            <li class="mb-2">Usuń sygnatury systemów plików i tablic partycji: <code>sudo wipefs --all /dev/sdb</code></li>
+                            
+                            <li class="mb-2">Dla pewności wyzeruj początek nośnika: <code>sudo dd if=/dev/zero of=/dev/sdb bs=1M count=100</code></li>
+                            
+                            <li class="mb-2">Utwórz nową tablicę i partycję: <code>sudo parted -s /dev/sdb mklabel msdos</code> <code>sudo parted -s /dev/sdb mkpart primary 1MiB 100%</code></li>
+                            
+                            <li class="mb-2">Sformatuj partycję: <code>sudo mkfs.vfat -F 32 -n PENDRIVE /dev/sdb1</code>. Zamiast FAT32 możesz użyć <code>sudo mkfs.exfat /dev/sdb1</code> albo <code>sudo mkfs.ext4 /dev/sdb1</code>.</li>
+                            
+                            <li class="mb-2">Zapisz dane i bezpiecznie wysuń nośnik: <code>sync && sudo eject /dev/sdb</code></li>
+                            
+                        </ol>
+                        
+                        <div class="alert alert-info small mb-0">Wolisz interfejs graficzny? W aplikacji <em>Dyski</em> (GNOME Disks) wybierz pendrive, z menu wybierz „Formatuj dysk…” i ustaw <em>Partycjonowanie: Kompatybilne ze wszystkimi systemami (MBR)</em>. Możesz też użyć GParted: <em>Urządzenie → Utwórz tablicę partycji</em>.</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="card border-0 shadow-sm catalog-card mt-4">
+            <div class="card-body">
+                <h5 class="fw-bold">Jeśli to nie pomaga</h5>
+                <ul class="mb-0">
+                    <li class="mb-1">Pendrive nie pojawia się w <code>list disk</code> / <code>lsblk</code>: spróbuj innego portu USB (najlepiej bezpośrednio w komputerze, bez huba) i innego kabla lub komputera.</li><li class="mb-1">Pojawia się błąd zapisu lub nośnik zmienia się w tylko do odczytu: pendrive może mieć przełącznik blokady zapisu albo kość pamięci jest uszkodzona.</li><li class="mb-1">Pojemność nadal jest błędna po <code>clean</code>: pendrive może być podróbką (fałszywa pojemność). Sprawdź go narzędziami F3 (Linux/macOS) lub H2testw (Windows).</li><li class="mb-1">Gdy nic nie działa, wypróbuj program Rufus: wybierz pendrive, ustaw schemat MBR i system FAT32 lub exFAT, a następnie kliknij START.</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <div class="mt-5 p-4 bg-white rounded shadow-sm">

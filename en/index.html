@@ -39,6 +39,20 @@
         .catalog-card:hover {
             transform: none;
         }
+        #recovery code, .modal-body code {
+            background: #f1f3f5;
+            color: #212529;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-variant-ligatures: none; /* "--" musi zostać dwoma myślnikami */
+            /* polecenie nie może się łamać w środku (np. między "--"), przy zbyt wąskim ekranie się przewija */
+            display: inline-block;
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            vertical-align: bottom;
+        }
         html { scroll-behavior: smooth; }
         [id^="cat-"] { scroll-margin-top: 16px; }
         .difficulty-badge {
@@ -571,6 +585,99 @@
         </div>
 
         <div class="alert alert-danger mt-4" role="alert">Download images only from official websites. Unofficial “lite” or “activated” Windows builds and tool bundles from random sources often contain malware.</div>
+    </section>
+
+    <section id="recovery" class="mt-5">
+        <h2 class="text-center mb-2">USB drive not working? How to fix it</h2>
+        <p class="text-center text-muted mb-4">After creating a bootable drive (Linux, a Windows installer, an ISO image, Ventoy) the system often shows only a small part of the capacity, displays odd partitions or refuses to format it. The most effective fix is to completely wipe the partition structure and create it again.</p>
+
+        <div class="alert alert-danger" role="alert">The steps below <b>permanently erase all data</b> on the selected disk. A wrong disk number (Windows) or device name (Linux) can wipe your system disk. Check the size and model of the drive before every command.</div>
+
+        <div class="card border-0 shadow-sm catalog-card mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold">Typical symptoms</h5>
+                <ul class="mb-0">
+                    <li>The drive shows a tiny capacity (e.g. 32 GB shown as 50 MB).</li><li>Windows says “Windows was unable to complete the format” or shows several strange partitions.</li><li>The disk is visible in Disk Management but has no drive letter or no “Format” option.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Windows: Diskpart</h4>
+                        <p class="text-muted small">A built-in command-line tool that wipes the partition table and lets you create it from scratch.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Plug in the drive and close any windows that use it.</li>
+                            
+                            <li class="mb-2">Press <kbd>Win</kbd>, type <code>cmd</code>, right-click <em>Command Prompt</em> and choose <em>Run as administrator</em>.</li>
+                            
+                            <li class="mb-2">Start the tool: <code>diskpart</code></li>
+                            
+                            <li class="mb-2">List the disks: <code>list disk</code>. Recognise your drive by its size (the <em>Size</em> column), e.g. “Disk 2”.</li>
+                            
+                            <li class="mb-2">Select the drive: <code>select disk 2</code> (type your own drive's number!). Check your choice with <code>detail disk</code>.</li>
+                            
+                            <li class="mb-2">If the disk is write-protected: <code>attributes disk clear readonly</code></li>
+                            
+                            <li class="mb-2">Remove all partitions: <code>clean</code>. To thoroughly zero the whole drive (takes a long time) use <code>clean all</code>.</li>
+                            
+                            <li class="mb-2">Create a new partition: <code>create partition primary</code></li>
+                            
+                            <li class="mb-2">Format it: <code>format fs=fat32 quick</code>. For large files or drives over 32 GB use <code>format fs=exfat quick</code> or <code>format fs=ntfs quick</code>.</li>
+                            
+                            <li class="mb-2">Assign a drive letter: <code>assign</code>, then leave the tool: <code>exit</code>.</li>
+                            
+                        </ol>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Linux:</h4>
+                        <p class="text-muted small">These steps only need tools available in most distributions (lsblk, wipefs, parted, mkfs). Run them with <code>sudo</code>.</p>
+                        <ol class="recovery-steps">
+                            
+                            <li class="mb-2">Plug in the drive and list the disks: <code>lsblk -o NAME,SIZE,MODEL,TRAN</code>. A USB drive usually has transport <em>usb</em> and a name like <code>/dev/sdb</code>. <code>/dev/sda</code> is most often the system disk!</li>
+                            
+                            <li class="mb-2">Unmount all partitions of the drive: <code>sudo umount /dev/sdb*</code> (you can ignore messages about partitions that are not mounted).</li>
+                            
+                            <li class="mb-2">Remove filesystem and partition table signatures: <code>sudo wipefs --all /dev/sdb</code></li>
+                            
+                            <li class="mb-2">To be safe, zero the beginning of the drive: <code>sudo dd if=/dev/zero of=/dev/sdb bs=1M count=100</code></li>
+                            
+                            <li class="mb-2">Create a new table and partition: <code>sudo parted -s /dev/sdb mklabel msdos</code> <code>sudo parted -s /dev/sdb mkpart primary 1MiB 100%</code></li>
+                            
+                            <li class="mb-2">Format the partition: <code>sudo mkfs.vfat -F 32 -n PENDRIVE /dev/sdb1</code>. Instead of FAT32 you can use <code>sudo mkfs.exfat /dev/sdb1</code> or <code>sudo mkfs.ext4 /dev/sdb1</code>.</li>
+                            
+                            <li class="mb-2">Flush data and eject safely: <code>sync && sudo eject /dev/sdb</code></li>
+                            
+                        </ol>
+                        
+                        <div class="alert alert-info small mb-0">Prefer a graphical interface? In <em>Disks</em> (GNOME Disks) select the drive, choose “Format Disk…” from the menu and set <em>Partitioning: Compatible with all systems and devices (MBR)</em>. You can also use GParted: <em>Device → Create Partition Table</em>.</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="card border-0 shadow-sm catalog-card mt-4">
+            <div class="card-body">
+                <h5 class="fw-bold">If that doesn&#39;t help</h5>
+                <ul class="mb-0">
+                    <li class="mb-1">The drive does not appear in <code>list disk</code> / <code>lsblk</code>: try another USB port (ideally directly on the computer, not a hub) and another cable or computer.</li><li class="mb-1">You get write errors or the drive turns read-only: it may have a write-protect switch, or the memory chip is damaged.</li><li class="mb-1">The capacity is still wrong after <code>clean</code>: the drive may be a counterfeit with fake capacity. Test it with F3 (Linux/macOS) or H2testw (Windows).</li><li class="mb-1">If nothing works, try Rufus: select the drive, set the MBR scheme and FAT32 or exFAT, then click START.</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <div class="mt-5 p-4 bg-white rounded shadow-sm">
