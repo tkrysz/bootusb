@@ -36,6 +36,11 @@
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+        .catalog-card:hover {
+            transform: none;
+        }
+        html { scroll-behavior: smooth; }
+        [id^="cat-"] { scroll-margin-top: 16px; }
         .difficulty-badge {
             font-size: 0.8rem;
         }
@@ -243,6 +248,330 @@
     <div class="alert alert-warning mt-4" role="alert">
         <strong>Uwaga:</strong> tworzenie bootowalnego pendrive usuwa wszystkie dane z nośnika. Zrób kopię zapasową. Pobieraj programy tylko z oficjalnych stron i, jeśli to możliwe, weryfikuj sumy kontrolne plików ISO.
     </div>
+
+    <section id="catalog" class="mt-5">
+        <h2 class="text-center mb-2">Co wrzucić na pendrive? Obrazy ISO i narzędzia</h2>
+        <p class="text-center text-muted mb-3">Gotowa lista sprawdzonych obrazów: systemy, narzędzia ratunkowe, backup, partycje i diagnostyka. Pliki .ISO kopiujesz na pendrive z Ventoy albo dodajesz je w YUMI / WinSetupFromUSB.</p>
+
+        <nav class="d-flex flex-wrap justify-content-center gap-2 mb-4" aria-label="Co wrzucić na pendrive? Obrazy ISO i narzędzia">
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-windows">Windows 10 i 11</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-linux">Popularne dystrybucje Linuksa</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-rescue">Narzędzia ratunkowe</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-backup">Backup i klonowanie dysków</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-partitions">Partycje i dyski</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-diagnostics">Diagnostyka sprzętu</a>
+            
+        </nav>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-6" id="cat-windows">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Windows 10 i 11</h4>
+                        <p class="text-muted small">Obrazy ISO Windows pobierzesz za darmo, legalnie i bez klucza prosto z Microsoftu. Klucz potrzebny jest dopiero do aktywacji systemu po instalacji. Link do pobrania ważny jest ok. 24 godziny. Uwaga: wsparcie dla Windows 10 zakończyło się w październiku 2025 r.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Windows 11</div>
+                                    <div class="small text-muted">Oficjalny obraz ISO (x64, wiele edycji w jednym pliku, ok. 5–6 GB). Na stronie wybierz „Pobierz obraz dysku (ISO)”, język i kliknij Pobierz.</div>
+                                </div>
+                                <a href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Windows 10</div>
+                                    <div class="small text-muted">Oficjalna strona z obrazem ISO Windows 10. Na Windowsie strona zwykle oferuje Media Creation Tool, a bezpośredni plik ISO pokazuje się po otwarciu jej z Linuksa/macOS albo w trybie emulacji innego urządzenia w przeglądarce.</div>
+                                </div>
+                                <a href="https://www.microsoft.com/software-download/windows10ISO" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Rufus</div>
+                                    <div class="small text-muted">Rufus potrafi sam pobrać oficjalny ISO Windows: obok przycisku WYBIERZ kliknij strzałkę i wybierz „POBIERZ”.</div>
+                                </div>
+                                <a href="https://rufus.ie/pl/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-linux">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Popularne dystrybucje Linuksa</h4>
+                        <p class="text-muted small">Większość dystrybucji działa jako Live USB: możesz je uruchomić i przetestować bez instalacji. Wybierz wersję Desktop dla 64-bitowych komputerów (amd64/x86_64).</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ubuntu</div>
+                                    <div class="small text-muted">Najpopularniejsza dystrybucja, dobry wybór na start. Wersje LTS są wspierane przez 5 lat.</div>
+                                </div>
+                                <a href="https://ubuntu.com/download/desktop" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Linux Mint</div>
+                                    <div class="small text-muted">Przyjazny dla osób przesiadających się z Windows. Wersja Cinnamon jest najpopularniejsza.</div>
+                                </div>
+                                <a href="https://linuxmint.com/download.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Debian</div>
+                                    <div class="small text-muted">Stabilna, uniwersalna baza wielu innych dystrybucji. Wybierz obraz „netinst” (mały) lub Live.</div>
+                                </div>
+                                <a href="https://www.debian.org/distrib/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Fedora Workstation</div>
+                                    <div class="small text-muted">Nowoczesna, aktualna dystrybucja wspierana przez Red Hat. Dobra dla programistów.</div>
+                                </div>
+                                <a href="https://fedoraproject.org/workstation/download" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Arch Linux</div>
+                                    <div class="small text-muted">Dla zaawansowanych: minimalny system budowany od zera. Wymaga instalacji z wiersza poleceń.</div>
+                                </div>
+                                <a href="https://archlinux.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">openSUSE</div>
+                                    <div class="small text-muted">Rozbudowana dystrybucja z narzędziem YaST. Wersje Tumbleweed (rolling) i Leap (stabilna).</div>
+                                </div>
+                                <a href="https://get.opensuse.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Manjaro</div>
+                                    <div class="small text-muted">Przystępna dystrybucja oparta na Arch Linuksie, z graficznym instalatorem.</div>
+                                </div>
+                                <a href="https://manjaro.org/products/download/x86" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Pop!_OS</div>
+                                    <div class="small text-muted">Linux od producenta System76, dobrze wspiera karty NVIDIA i ma wygodne zarządzanie oknami.</div>
+                                </div>
+                                <a href="https://system76.com/pop" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Kali Linux</div>
+                                    <div class="small text-muted">Dystrybucja do testów penetracyjnych i badań bezpieczeństwa. Używaj wyłącznie legalnie.</div>
+                                </div>
+                                <a href="https://www.kali.org/get-kali/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-rescue">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Narzędzia ratunkowe</h4>
+                        <p class="text-muted small">Przydają się, gdy system się nie uruchamia, trzeba zresetować hasło, odzyskać pliki albo naprawić bootloader.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Hiren&#39;s BootCD PE</div>
+                                    <div class="small text-muted">Zestaw narzędzi na bazie Windows PE: odzyskiwanie danych, reset haseł, partycje, diagnostyka. To projekt społeczności, nie oryginalnego autora, a jego strona jest oficjalnym źródłem tego projektu. Plik ISO ma ok. 3 GB.</div>
+                                </div>
+                                <a href="https://www.hirensbootcd.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">SystemRescue</div>
+                                    <div class="small text-muted">Lekki system Linux do naprawy i odzyskiwania danych (GParted, narzędzia systemów plików, dostęp do sieci). Obraz ma ok. 900 MB.</div>
+                                </div>
+                                <a href="https://www.system-rescue.org/Download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Super Grub2 Disk</div>
+                                    <div class="small text-muted">Pomaga uruchomić system, gdy zepsuł się GRUB lub MBR, nawet bez dostępu do menu startowego.</div>
+                                </div>
+                                <a href="https://www.supergrubdisk.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ultimate Boot CD</div>
+                                    <div class="small text-muted">Klasyczny zestaw narzędzi diagnostycznych i naprawczych. Aktualizowany rzadko, więc nadaje się głównie do starszych komputerów.</div>
+                                </div>
+                                <a href="https://www.ultimatebootcd.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-backup">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Backup i klonowanie dysków</h4>
+                        <p class="text-muted small">Obrazy do tworzenia kopii całych dysków i partycji oraz do przenoszenia systemu na nowy dysk.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Clonezilla Live</div>
+                                    <div class="small text-muted">Szybkie klonowanie i obrazowanie dysków oraz partycji, obsługuje wiele systemów plików. Obsługa w trybie tekstowym, wymaga pewnej wprawy.</div>
+                                </div>
+                                <a href="https://clonezilla.org/downloads.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Rescuezilla</div>
+                                    <div class="small text-muted">Graficzna nakładka na Clonezillę: kopie zapasowe i przywracanie kilkoma kliknięciami. Obrazy są zgodne z Clonezillą.</div>
+                                </div>
+                                <a href="https://rescuezilla.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-partitions">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Partycje i dyski</h4>
+                        <p class="text-muted small">Zmiana rozmiaru, tworzenie i usuwanie partycji, kopiowanie danych oraz naprawa tablicy partycji bez uruchamiania systemu z dysku.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">GParted Live</div>
+                                    <div class="small text-muted">Graficzny edytor partycji w wersji Live. Zmienia rozmiar, przenosi i kopiuje partycje, obsługuje większość systemów plików.</div>
+                                </div>
+                                <a href="https://gparted.org/download.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">SystemRescue</div>
+                                    <div class="small text-muted">Zawiera GParted oraz narzędzia konsolowe (parted, fdisk, ntfs-3g, testdisk) do pracy z dyskami i odzyskiwania danych.</div>
+                                </div>
+                                <a href="https://www.system-rescue.org/Download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Hiren&#39;s BootCD PE</div>
+                                    <div class="small text-muted">Zawiera graficzne menedżery partycji dla Windows i narzędzia do odzyskiwania danych.</div>
+                                </div>
+                                <a href="https://www.hirensbootcd.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-diagnostics">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Diagnostyka sprzętu</h4>
+                        <p class="text-muted small">Sprawdzanie pamięci RAM i dysków oraz wykrywanie usterek, gdy komputer się zawiesza lub restartuje.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">MemTest86+</div>
+                                    <div class="small text-muted">Wolnoźródłowy test pamięci RAM. Uruchamia się bez systemu. Pozwól mu przejść co najmniej jeden pełny przebieg.</div>
+                                </div>
+                                <a href="https://memtest.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">MemTest86 (PassMark)</div>
+                                    <div class="small text-muted">Komercyjny, ale darmowy w wersji podstawowej test RAM od PassMark. Obsługuje UEFI i Secure Boot.</div>
+                                </div>
+                                <a href="https://www.memtest86.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">HDAT2</div>
+                                    <div class="small text-muted">Diagnostyka dysków twardych i SSD (SMART, test powierzchni, odczyt błędów).</div>
+                                </div>
+                                <a href="https://www.hdat2.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ultimate Boot CD</div>
+                                    <div class="small text-muted">Zawiera wiele narzędzi do testowania procesora, pamięci i dysków, w tym narzędzia producentów dysków.</div>
+                                </div>
+                                <a href="https://www.ultimatebootcd.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Pobierz</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="alert alert-danger mt-4" role="alert">Pobieraj obrazy wyłącznie z oficjalnych stron. Nieoficjalne „odchudzone” lub „zaktywowane” wersje Windows i zbiory narzędzi z przypadkowych źródeł często zawierają złośliwe oprogramowanie.</div>
+    </section>
 
     <div class="mt-5 p-4 bg-white rounded shadow-sm">
         <h3 class="text-center mb-4">Podsumowanie - co wybrać?</h3>

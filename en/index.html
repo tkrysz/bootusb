@@ -36,6 +36,11 @@
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+        .catalog-card:hover {
+            transform: none;
+        }
+        html { scroll-behavior: smooth; }
+        [id^="cat-"] { scroll-margin-top: 16px; }
         .difficulty-badge {
             font-size: 0.8rem;
         }
@@ -243,6 +248,330 @@
     <div class="alert alert-warning mt-4" role="alert">
         <strong>Warning:</strong> creating a bootable USB drive erases all data on the device. Make a backup first. Download tools only from official websites and, if possible, verify the checksums of ISO files.
     </div>
+
+    <section id="catalog" class="mt-5">
+        <h2 class="text-center mb-2">What to put on the drive? ISO images and tools</h2>
+        <p class="text-center text-muted mb-3">A ready list of trusted images: operating systems, rescue tools, backup, partitioning and diagnostics. Copy the .ISO files onto a Ventoy drive or add them in YUMI / WinSetupFromUSB.</p>
+
+        <nav class="d-flex flex-wrap justify-content-center gap-2 mb-4" aria-label="What to put on the drive? ISO images and tools">
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-windows">Windows 10 and 11</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-linux">Popular Linux distributions</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-rescue">Rescue tools</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-backup">Backup and disk cloning</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-partitions">Partitions and disks</a>
+            
+            <a class="btn btn-sm btn-outline-primary" href="#cat-diagnostics">Hardware diagnostics</a>
+            
+        </nav>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-6" id="cat-windows">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Windows 10 and 11</h4>
+                        <p class="text-muted small">You can download Windows ISO images for free and legally straight from Microsoft, with no product key. A key is only needed to activate Windows after installation. The download link is valid for about 24 hours. Note: support for Windows 10 ended in October 2025.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Windows 11</div>
+                                    <div class="small text-muted">Official ISO (x64, multiple editions in one file, about 5–6 GB). On the page choose “Download Windows 11 Disk Image (ISO)”, pick a language and click Download.</div>
+                                </div>
+                                <a href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Windows 10</div>
+                                    <div class="small text-muted">Official Windows 10 ISO page. On Windows it usually offers the Media Creation Tool; the direct ISO is shown when you open the page from Linux/macOS or with another device emulated in your browser.</div>
+                                </div>
+                                <a href="https://www.microsoft.com/software-download/windows10ISO" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Rufus</div>
+                                    <div class="small text-muted">Rufus can download an official Windows ISO itself: click the arrow next to the SELECT button and choose “DOWNLOAD”.</div>
+                                </div>
+                                <a href="https://rufus.ie/en/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-linux">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Popular Linux distributions</h4>
+                        <p class="text-muted small">Most distributions work as a Live USB: you can boot and try them without installing. Choose the Desktop edition for 64-bit computers (amd64/x86_64).</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ubuntu</div>
+                                    <div class="small text-muted">The most popular distribution and a good starting point. LTS releases are supported for 5 years.</div>
+                                </div>
+                                <a href="https://ubuntu.com/download/desktop" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Linux Mint</div>
+                                    <div class="small text-muted">Friendly for people switching from Windows. The Cinnamon edition is the most popular.</div>
+                                </div>
+                                <a href="https://linuxmint.com/download.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Debian</div>
+                                    <div class="small text-muted">A stable, universal base for many other distributions. Pick the small “netinst” image or a Live image.</div>
+                                </div>
+                                <a href="https://www.debian.org/distrib/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Fedora Workstation</div>
+                                    <div class="small text-muted">A modern, up-to-date distribution sponsored by Red Hat. Great for developers.</div>
+                                </div>
+                                <a href="https://fedoraproject.org/workstation/download" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Arch Linux</div>
+                                    <div class="small text-muted">For advanced users: a minimal system built from scratch. Installed from the command line.</div>
+                                </div>
+                                <a href="https://archlinux.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">openSUSE</div>
+                                    <div class="small text-muted">A feature-rich distribution with the YaST tool. Available as Tumbleweed (rolling) and Leap (stable).</div>
+                                </div>
+                                <a href="https://get.opensuse.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Manjaro</div>
+                                    <div class="small text-muted">An approachable Arch-based distribution with a graphical installer.</div>
+                                </div>
+                                <a href="https://manjaro.org/products/download/x86" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Pop!_OS</div>
+                                    <div class="small text-muted">Linux from hardware maker System76 with good NVIDIA support and convenient window tiling.</div>
+                                </div>
+                                <a href="https://system76.com/pop" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Kali Linux</div>
+                                    <div class="small text-muted">A distribution for penetration testing and security research. Use it lawfully only.</div>
+                                </div>
+                                <a href="https://www.kali.org/get-kali/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-rescue">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Rescue tools</h4>
+                        <p class="text-muted small">Useful when the system won&#39;t boot, you need to reset a password, recover files or repair the bootloader.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Hiren&#39;s BootCD PE</div>
+                                    <div class="small text-muted">A toolkit based on Windows PE: data recovery, password reset, partitioning, diagnostics. It is a community project, not by the original author, and this site is that project&#39;s official source. The ISO is about 3 GB.</div>
+                                </div>
+                                <a href="https://www.hirensbootcd.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">SystemRescue</div>
+                                    <div class="small text-muted">A lightweight Linux system for repair and data recovery (GParted, filesystem tools, networking). The image is about 900 MB.</div>
+                                </div>
+                                <a href="https://www.system-rescue.org/Download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Super Grub2 Disk</div>
+                                    <div class="small text-muted">Helps boot a system when GRUB or the MBR is broken, even without a working boot menu.</div>
+                                </div>
+                                <a href="https://www.supergrubdisk.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ultimate Boot CD</div>
+                                    <div class="small text-muted">A classic set of diagnostic and repair tools. Rarely updated, so best suited to older computers.</div>
+                                </div>
+                                <a href="https://www.ultimatebootcd.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-backup">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Backup and disk cloning</h4>
+                        <p class="text-muted small">Images for backing up whole disks and partitions and for moving a system to a new drive.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Clonezilla Live</div>
+                                    <div class="small text-muted">Fast disk and partition cloning and imaging that supports many filesystems. Text-mode interface that takes some getting used to.</div>
+                                </div>
+                                <a href="https://clonezilla.org/downloads.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Rescuezilla</div>
+                                    <div class="small text-muted">A graphical front end for Clonezilla: back up and restore in a few clicks. Images are compatible with Clonezilla.</div>
+                                </div>
+                                <a href="https://rescuezilla.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-partitions">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Partitions and disks</h4>
+                        <p class="text-muted small">Resize, create and delete partitions, copy data and repair the partition table without booting the installed system.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">GParted Live</div>
+                                    <div class="small text-muted">A graphical partition editor in Live form. Resizes, moves and copies partitions and supports most filesystems.</div>
+                                </div>
+                                <a href="https://gparted.org/download.php" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">SystemRescue</div>
+                                    <div class="small text-muted">Includes GParted and console tools (parted, fdisk, ntfs-3g, testdisk) for working with disks and recovering data.</div>
+                                </div>
+                                <a href="https://www.system-rescue.org/Download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Hiren&#39;s BootCD PE</div>
+                                    <div class="small text-muted">Includes graphical partition managers for Windows and data recovery tools.</div>
+                                </div>
+                                <a href="https://www.hirensbootcd.org/download/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" id="cat-diagnostics">
+                <div class="card border-0 shadow-sm catalog-card">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Hardware diagnostics</h4>
+                        <p class="text-muted small">Check RAM and drives and track down faults when the computer freezes or reboots.</p>
+                        <ul class="list-group list-group-flush">
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">MemTest86+</div>
+                                    <div class="small text-muted">An open-source RAM test. Runs without an operating system. Let it finish at least one full pass.</div>
+                                </div>
+                                <a href="https://memtest.org/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">MemTest86 (PassMark)</div>
+                                    <div class="small text-muted">A commercial RAM tester from PassMark that is free in its basic edition. Supports UEFI and Secure Boot.</div>
+                                </div>
+                                <a href="https://www.memtest86.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">HDAT2</div>
+                                    <div class="small text-muted">Diagnostics for hard drives and SSDs (SMART, surface test, error reading).</div>
+                                </div>
+                                <a href="https://www.hdat2.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <div class="fw-bold">Ultimate Boot CD</div>
+                                    <div class="small text-muted">Contains many tools for testing the CPU, memory and drives, including drive manufacturers&#39; utilities.</div>
+                                </div>
+                                <a href="https://www.ultimatebootcd.com/" target="_blank" rel="noopener noreferrer"
+                                   class="btn btn-sm btn-primary flex-shrink-0">Download</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="alert alert-danger mt-4" role="alert">Download images only from official websites. Unofficial “lite” or “activated” Windows builds and tool bundles from random sources often contain malware.</div>
+    </section>
 
     <div class="mt-5 p-4 bg-white rounded shadow-sm">
         <h3 class="text-center mb-4">Summary - which one to choose?</h3>
